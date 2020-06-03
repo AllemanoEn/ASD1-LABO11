@@ -66,6 +66,7 @@ private:
     void croissant(Fn f, Node<Key>* racine);
     bool rContient(const Key &k, Node<Key>* racine) const noexcept ;
     void rCopier(Node<Key>* racine, Node<Key>* racineCopie);
+    void rDetruire(Node<Key> *racine);
 };
 
 // toutes les fonctions sont définies dans le fichier inclus ci-dessous
