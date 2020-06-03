@@ -118,5 +118,35 @@ bool bst<Key>::rContient(const Key &k, Node<Key>* racine) const noexcept {
     }
 }
 
+template<typename Key>
+bst<Key>::bst(bst const &other) {
+    if(!other.root){
+        root = nullptr;
+        return;
+    }
+    root = new Node<Key>{other.root->key, nullptr, nullptr};
+    rCopier(root, other.root);
+}
+
+template<typename Key>
+void bst<Key>::rCopier(Node<Key> *racine, Node<Key> *racineCopie) {
+    if(racineCopie->left){
+        racine->left = new Node<Key>{racineCopie->left->key, nullptr, nullptr};
+        rCopier(racine->left, racineCopie->left);
+    }
+
+    if(racineCopie->right){
+        racine->right = new Node<Key>{racineCopie->right->key, nullptr, nullptr};
+        rCopier(racine->right, racineCopie->right);
+    }
+}
+
+template<typename Key>
+bst<Key> &bst<Key>::operator=(bst const &other) {
+    using std::swap;
+    bst tmp(other);
+    swap(root, tmp.root);
+    return *this;
+}
 
 #endif //ASD1_LABS_2020_BST_IMPL_H
