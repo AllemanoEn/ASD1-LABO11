@@ -65,6 +65,7 @@ private:
     template<typename Fn>
     void croissant(Fn f, Node<Key>* racine);
     bool rContient(const Key &k, Node<Key>* racine) const noexcept ;
+    void rCopier(Node<Key>* racine, Node<Key>* racineCopie);
 };
 
 // toutes les fonctions sont définies dans le fichier inclus ci-dessous
