@@ -98,3 +98,17 @@ TEST_CASE( "contains", "[bst]") {
             REQUIRE(!tree.contains(i));
     }
 }
+
+TEST_CASE( "destructeur", "[bst]") {
+
+    bst<int> tree;
+
+    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+        tree.insert(i);
+
+    SECTION( "arbre à détruire" ) {
+        tree.~bst();
+        REQUIRE(to_string(tree) == "");
+    }
+
+}
