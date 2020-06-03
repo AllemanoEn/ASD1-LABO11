@@ -49,7 +49,18 @@ bst<Key>::bst() : root(nullptr) {
 
 template<typename Key>
 bst<Key>::~bst() {
-    // à mettre en oeuvre
+    rDetruire(root);
+}
+
+template<typename Key>
+void bst<Key>::rDetruire(Node<Key> *racine){
+    if (racine)
+    {
+        rDetruire(racine->left);
+        rDetruire(racine->right);
+        delete racine;
+    }
+
 }
 
 template<typename Key>
@@ -73,9 +84,9 @@ template<typename Key>
 template<typename Fn>
 void bst<Key>::croissant(Fn f, Node<Key> *racine) {
     if (racine){
-        pre_ordre(f, racine->left);
+        croissant(f, racine->left);
         f(racine);
-        pre_ordre(f, racine->right);
+        croissant(f, racine->right);
     }
 }
 
@@ -106,7 +117,6 @@ bool bst<Key>::rContient(const Key &k, Node<Key>* racine) const noexcept {
         rContient(k, racine->right);
     }
 }
-
 
 
 #endif //ASD1_LABS_2020_BST_IMPL_H
