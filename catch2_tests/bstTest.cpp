@@ -27,6 +27,42 @@ TEST_CASE( "operator<<", "[bst]") {
     }
 }
 
+TEST_CASE( "operateur de copie", "[bst]") {
+
+    bst<int> tree;
+
+    SECTION( "Test de copie" ) {
+        for(int i : { 8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12 })
+            tree.insert(i);
+
+        bst<int> tree2(tree);
+        REQUIRE( to_string(tree2) == "8(4(1(.,2(.,3)),6(5,7)),11(10,12))" );
+    }
+
+    SECTION( "copier arbre vide" ) {
+        bst<int> tree2(tree);
+        REQUIRE( to_string(tree2) == "" );
+    }
+}
+
+TEST_CASE( "operateur d'affectation", "[bst]") {
+
+    bst<int> tree;
+
+    SECTION( "Test d'affectation'" ) {
+        for(int i : { 8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12 })
+            tree.insert(i);
+
+        bst<int> tree2 = tree;
+        REQUIRE( to_string(tree2) == "8(4(1(.,2(.,3)),6(5,7)),11(10,12))" );
+    }
+
+    SECTION( "copier arbre vide" ) {
+        bst<int> tree2 = tree;
+        REQUIRE( to_string(tree2) == "" );
+    }
+}
+
 TEST_CASE( "insert", "[bst]") {
 
     bst<int> tree;
@@ -97,4 +133,8 @@ TEST_CASE( "contains", "[bst]") {
         for (int i : {9, 13, 0, -7, 1500, 99, 14, 15, -11, 27, 120})
             REQUIRE(!tree.contains(i));
     }
+}
+
+TEST_CASE("visit in order", "[bst]") {
+
 }
