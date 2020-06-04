@@ -49,18 +49,22 @@ bst<Key>::bst() : root(nullptr) {
 
 template<typename Key>
 bst<Key>::~bst() {
-    rDetruire(root);
+    if (root){
+        rDetruire(root);
+        root = nullptr;
+    }
 }
 
 template<typename Key>
 void bst<Key>::rDetruire(Node<Key> *racine){
-    if (racine)
-    {
+    if(racine->left){
         rDetruire(racine->left);
+    }
+    if(racine->right) {
         rDetruire(racine->right);
-        delete racine;
     }
 
+    delete racine;
 }
 
 template<typename Key>
