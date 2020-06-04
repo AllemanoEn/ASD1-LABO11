@@ -183,7 +183,32 @@ void bst<Key>::rIndenter(Node<Key> *racine, std::string prefixe, std::ostream &s
 
 template<typename Key>
 Key const &bst<Key>::min() const {
-    
+    return rComparaisonMin(root);
 }
+
+template<typename Key>
+Key const &bst<Key>::rComparaisonMin(Node<Key>* racine) const{
+    if (racine->left){
+        rComparaisonMin(racine->left);
+    } else{
+        return racine->key;
+    }
+}
+
+template<typename Key>
+Key const &bst<Key>::max() const {
+    return rComparaisonMax(root);
+}
+
+template<typename Key>
+Key const &bst<Key>::rComparaisonMax(Node<Key> *racine) const{
+    if (racine->right){
+        rComparaisonMax(racine->right);
+    } else{
+        return racine->key;
+    }
+}
+
+
 
 #endif //ASD1_LABS_2020_BST_IMPL_H

@@ -68,6 +68,8 @@ private:
     void rCopier(Node<Key>* racine, Node<Key>* racineCopie);
     void rDetruire(Node<Key> *racine);
     void rIndenter (Node<Key>* racine, std::string prefixe, std::ostream &s, bool droite) const;
+    Key const& rComparaisonMin(Node<Key>* racine) const;
+    Key const& rComparaisonMax(Node<Key>* racine) const;
 };
 
 // toutes les fonctions sont définies dans le fichier inclus ci-dessous
