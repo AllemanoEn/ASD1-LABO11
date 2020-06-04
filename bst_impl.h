@@ -73,7 +73,9 @@ void bst<Key>::insert(Key const& k) {
 
 template<typename Key>
 void bst<Key>::display_indented(std::ostream &s) const noexcept {
-    s << "does not work yet obviously";
+    s << std::to_string(root->key) << "\n";
+    rIndenter(root->left, "|", s);
+    rIndenter(root->right, "|", s);
 }
 
 template <typename Key>
@@ -150,6 +152,30 @@ bst<Key> &bst<Key>::operator=(bst const &other) {
     bst tmp(other);
     swap(root, tmp.root);
     return *this;
+}
+
+template<typename Key>
+void bst<Key>::rIndenter(Node<Key> *racine, std::string prefixe, std::ostream &s) const{
+
+    if (racine) {
+        s << prefixe << "_ " << std::to_string(racine->key) << "\n";
+        prefixe += "  |";
+        if(racine->left){
+            rIndenter(racine->left, prefixe, s);
+            if(!racine->right){
+                s << prefixe << "_ .\n";
+            }
+            else {
+
+                rIndenter(racine->right, prefixe, s);
+            }
+        } else if(racine->right){
+            s << prefixe << "_ .\n";
+            prefixe.replace(prefixe.end()-1, prefixe.end(), " ");
+            rIndenter(racine->right, prefixe, s);
+        }
+    }
+
 }
 
 #endif //ASD1_LABS_2020_BST_IMPL_H

@@ -67,6 +67,7 @@ private:
     bool rContient(const Key &k, Node<Key>* racine) const noexcept ;
     void rCopier(Node<Key>* racine, Node<Key>* racineCopie);
     void rDetruire(Node<Key> *racine);
+    void rIndenter (Node<Key>* racine, std::string prefixe, std::ostream &s) const;
 };
 
 // toutes les fonctions sont définies dans le fichier inclus ci-dessous
