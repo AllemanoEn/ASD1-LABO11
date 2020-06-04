@@ -148,3 +148,47 @@ TEST_CASE( "destructeur", "[bst]") {
     }
 
 }
+
+TEST_CASE( "Min", "[bst]") {
+
+    bst<int> tree1;
+    bst<int> tree2;
+    bst<int> tree3;
+
+    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+        tree1.insert(i);
+    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+        tree2.insert(i);
+
+    SECTION( "Chercher le min" ) {
+        REQUIRE(to_string(tree1.min()) == "");
+    }
+    SECTION( "Chercher le min" ) {
+        REQUIRE(to_string(tree1.min()) == "");
+    }
+    SECTION( "Chercher le min (lève une exception)" ) {
+        REQUIRE(to_string(tree1.min()) == "");
+    }
+}
+
+TEST_CASE( "Max", "[bst]") {
+
+    bst<int> tree1;
+    bst<int> tree2;
+    bst<int> tree3;
+
+    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+        tree1.insert(i);
+    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+        tree2.insert(i);
+
+    SECTION( "Chercher le max" ) {
+        REQUIRE(to_string(tree1.min()) == "");
+    }
+    SECTION( "Chercher le max" ) {
+        REQUIRE(to_string(tree1.min()) == "");
+    }
+    SECTION( "Chercher le max (lève une exception)" ) {
+        REQUIRE(to_string(tree1.min()) == "");
+    }
+}
