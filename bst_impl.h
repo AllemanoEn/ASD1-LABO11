@@ -181,4 +181,9 @@ void bst<Key>::rIndenter(Node<Key> *racine, std::string prefixe, std::ostream &s
 
 }
 
+template<typename Key>
+Key const &bst<Key>::min() const {
+    
+}
+
 #endif //ASD1_LABS_2020_BST_IMPL_H
