@@ -57,12 +57,11 @@ bst<Key>::~bst() {
 
 template<typename Key>
 void bst<Key>::rDetruire(Node<Key> *racine){
-    if(racine->left){
+    if(racine->left)
         rDetruire(racine->left);
-    }
-    if(racine->right) {
+
+    if(racine->right)
         rDetruire(racine->right);
-    }
 
     delete racine;
 }
