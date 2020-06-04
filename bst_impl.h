@@ -8,6 +8,7 @@
 // fonctions récursives n'ayant pas à connaitre root
 
 #include "bst.h"
+#include <stdexcept>
 
 template<typename Key>
 void bst<Key>::insert(Node<Key> *&r, Key const &k) {
