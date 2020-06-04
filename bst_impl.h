@@ -74,9 +74,11 @@ void bst<Key>::insert(Key const& k) {
 
 template<typename Key>
 void bst<Key>::display_indented(std::ostream &s) const noexcept {
-    s << std::to_string(root->key) << "\n";
-    rIndenter(root->left, "|", s, false);
-    rIndenter(root->right, "|", s, true);
+    if(root) {
+        s << std::to_string(root->key) << "\n";
+        rIndenter(root->left, "|", s, false);
+        rIndenter(root->right, "|", s, true);
+    }
 }
 
 template <typename Key>
@@ -161,22 +163,27 @@ void bst<Key>::rIndenter(Node<Key> *racine, std::string prefixe, std::ostream &s
     if (racine) {
 
         s << prefixe << "_ " << std::to_string(racine->key) << "\n";
+
         if (droite){
             prefixe.replace(prefixe.end()-1, prefixe.end(), " ");
         }
+
         prefixe += "  |";
+
         if(racine->left){
             rIndenter(racine->left, prefixe, s, false);
+
             if(!racine->right){
                 s << prefixe << "_ .\n";
-            }
-            else {
+            } else {
                 rIndenter(racine->right, prefixe, s, true);
             }
         } else if(racine->right){
             s << prefixe << "_ .\n";
             rIndenter(racine->right, prefixe, s, true);
         }
+    } else{
+        s << prefixe << "_ .\n";
     }
 
 }

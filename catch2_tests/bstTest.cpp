@@ -115,6 +115,62 @@ TEST_CASE("display_indented", "[bst]") {
                               "   |_ 10\n"
                               "   |_ 12\n" );
     }
+
+    SECTION( "Arbre unaire sur la droite" ) {
+        for(int i : { 8, 4, 3, 2, 1})
+            tree.insert(i);
+
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE( oss.str() == "8\n"
+                              "|_ 4\n"
+                              "|  |_ 3\n"
+                              "|  |  |_ 2\n"
+                              "|  |  |  |_ 1\n"
+                              "|  |  |  |_ .\n"
+                              "|  |  |_ .\n"
+                              "|  |_ .\n"
+                              "|_ .\n");
+    }
+
+    SECTION( "Arbre unaire sur la gauche" ) {
+        for(int i : { 8, 9, 10, 11, 12})
+            tree.insert(i);
+
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE( oss.str() == "8\n"
+                              "|_ .\n"
+                              "|_ 9\n"
+                              "   |_ .\n"
+                              "   |_ 10\n"
+                              "      |_ .\n"
+                              "      |_ 11\n"
+                              "         |_ .\n"
+                              "         |_ 12\n");
+    }
+    SECTION( "Arbre unaire sur la gauche" ) {
+        for(int i : { 8, 9, 10, 11, 12})
+            tree.insert(i);
+
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE( oss.str() == "8\n"
+                              "|_ .\n"
+                              "|_ 9\n"
+                              "   |_ .\n"
+                              "   |_ 10\n"
+                              "      |_ .\n"
+                              "      |_ 11\n"
+                              "         |_ .\n"
+                              "         |_ 12\n");
+    }
+
+    SECTION( "Arbre vide" ) {
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE( oss.str().empty());
+    }
 }
 
 TEST_CASE( "contains", "[bst]") {
