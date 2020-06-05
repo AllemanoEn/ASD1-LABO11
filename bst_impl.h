@@ -190,7 +190,12 @@ void bst<Key>::rIndenter(Node<Key> *racine, std::string prefixe, std::ostream &s
 
 template<typename Key>
 Key const &bst<Key>::min() const {
-    return rComparaisonMin(root);
+
+    if(root){
+        return rComparaisonMin(root);
+    }else{
+        throw std::exception();
+    }
 }
 
 template<typename Key>
@@ -204,7 +209,11 @@ Key const &bst<Key>::rComparaisonMin(Node<Key>* racine) const{
 
 template<typename Key>
 Key const &bst<Key>::max() const {
-    return rComparaisonMax(root);
+    if(root){
+        return rComparaisonMax(root);
+    }else{
+        throw std::exception();
+    }
 }
 
 template<typename Key>

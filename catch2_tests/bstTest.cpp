@@ -213,17 +213,17 @@ TEST_CASE( "Min", "[bst]") {
 
     for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
         tree1.insert(i);
-    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+    for (int i : {-8, -4, -1, -2, -3, -6, -5, -7, -11, -10, -12})
         tree2.insert(i);
 
     SECTION( "Chercher le min" ) {
-        REQUIRE(to_string(tree1.min()) == "");
+        REQUIRE(tree1.min() == 1);
     }
     SECTION( "Chercher le min" ) {
-        REQUIRE(to_string(tree1.min()) == "");
+        REQUIRE(tree2.min() == -12);
     }
     SECTION( "Chercher le min (lève une exception)" ) {
-        REQUIRE(to_string(tree1.min()) == "");
+        REQUIRE_THROWS_AS(tree3.min(),std::exception);
     }
 }
 
@@ -235,16 +235,16 @@ TEST_CASE( "Max", "[bst]") {
 
     for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
         tree1.insert(i);
-    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+    for (int i : {-8, -4, -1, -2, -3, -6, -5, -7, -11, -10, -12})
         tree2.insert(i);
 
     SECTION( "Chercher le max" ) {
-        REQUIRE(to_string(tree1.min()) == "");
+        REQUIRE(tree1.max() == 12);
     }
     SECTION( "Chercher le max" ) {
-        REQUIRE(to_string(tree1.min()) == "");
+        REQUIRE(tree2.max() == -1);
     }
     SECTION( "Chercher le max (lève une exception)" ) {
-        REQUIRE(to_string(tree1.min()) == "");
+        REQUIRE_THROWS_AS(tree3.max(),std::exception);
     }
 }
