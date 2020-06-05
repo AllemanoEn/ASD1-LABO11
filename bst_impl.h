@@ -207,6 +207,8 @@ Key const &bst<Key>::rComparaisonMin(Node<Key>* racine) const{
     }
 }
 
+
+
 template<typename Key>
 Key const &bst<Key>::max() const {
     if(root){
@@ -225,6 +227,56 @@ Key const &bst<Key>::rComparaisonMax(Node<Key> *racine) const{
     }
 }
 
+template<typename Key>
+void bst<Key>::erase_min() {
+    erase(rComparaisonMin(root));
+}
 
+template<typename Key>
+void bst<Key>::erase_max() {
+    erase(rComparaisonMax(root));
+}
+
+template<typename Key>
+void bst<Key>::erase(const Key &k) noexcept {
+    rEffacer(root, k);
+}
+
+template<typename Key>
+void bst<Key>::rEffacer(Node<Key> *racine, const Key &k) noexcept {
+    if(!racine){
+        return; // k n'est pas là
+    } else if(racine->key > k){ // k est sur la gauche de l'arbre
+        rEffacer(racine->left, k);
+    } else if(racine->key < k){ //k est sur la droite de l'arbre
+        rEffacer(racine->right, k);
+    } else{ // k est trouvé
+        Node<Key>* tmp = racine;
+        if (!racine->left){
+            racine = racine->right;
+        } else if (!racine->right){
+            racine = racine->left;
+        }
+        else{
+            Node<Key>* m = sortir_min(racine->right);
+            m->right = racine->right;
+            m->left = racine->left;
+            racine = m;
+        }
+        delete tmp;
+    }
+}
+
+template <typename Key>
+Node<Key>* bst<Key>::sortir_min(Node<Key>* racine){
+    if (racine->left){
+        return sortir_min(racine->left);
+    }
+    else{
+        Node<Key>* tmp = racine;
+        racine = racine->right;
+        return tmp;
+    }
+}
 
 #endif //ASD1_LABS_2020_BST_IMPL_H

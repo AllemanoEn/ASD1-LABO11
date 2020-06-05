@@ -189,6 +189,12 @@ TEST_CASE( "contains", "[bst]") {
         for (int i : {9, 13, 0, -7, 1500, 99, 14, 15, -11, 27, 120})
             REQUIRE(!tree.contains(i));
     }
+
+    SECTION("Contient un élément"){
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.insert(i);
+        REQUIRE(tree.contains(11));
+    }
 }
 
 TEST_CASE( "destructeur", "[bst]") {
@@ -247,4 +253,17 @@ TEST_CASE( "Max", "[bst]") {
     SECTION( "Chercher le max (lève une exception)" ) {
         REQUIRE_THROWS_AS(tree3.max(),std::exception);
     }
+}
+
+TEST_CASE( "erase", "[bst]") {
+
+    bst<int> tree;
+
+    SECTION( "contient tous les éléments" ) {
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.insert(i);
+        tree.erase(7);
+        REQUIRE(!tree.contains(7));
+    }
+
 }
