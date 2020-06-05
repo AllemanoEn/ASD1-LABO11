@@ -259,27 +259,39 @@ TEST_CASE( "erase", "[bst]") {
 
     bst<int> tree;
 
-    SECTION( "contient tous les éléments" ) {
+    SECTION( "suppression d'un élément" ) {
         for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
             tree.insert(i);
 
         tree.erase(7);
-        ostringstream oss;
-        tree.display_indented(oss);
-
-        REQUIRE( oss.str() == "8\n"
-                              "|_ 4\n"
-                              "|  |_ 1\n"
-                              "|  |  |_ .\n"
-                              "|  |  |_ 2\n"
-                              "|  |     |_ .\n"
-                              "|  |     |_ 3\n"
-                              "|  |_ 6\n"
-                              "|     |_ 5\n"
-                              "|     |_ .\n"
-                              "|_ 11\n"
-                              "   |_ 10\n"
-                              "   |_ 12\n" );
+        REQUIRE(!tree.contains(7));
     }
+
+    SECTION( "suppression d'un élément non dans l'arbre" ) {
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.insert(i);
+
+        tree.erase(15);
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            REQUIRE(tree.contains(i));
+    }
+
+    SECTION( "suppression deux fois d'un élément" ) {
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.insert(i);
+
+        tree.erase(3);
+        tree.erase(3);
+        REQUIRE(!tree.contains(3));
+    }
+
+    SECTION( "suppression de la racine" ) {
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.insert(i);
+
+        tree.erase(4);
+        REQUIRE(!tree.contains(4));
+    }
+
 
 }
