@@ -243,7 +243,7 @@ void bst<Key>::erase(const Key &k) noexcept {
 }
 
 template<typename Key>
-void bst<Key>::rEffacer(Node<Key> *racine, const Key &k) noexcept {
+void bst<Key>::rEffacer(Node<Key> *&racine, const Key &k) noexcept {
     if(!racine){
         return; // k n'est pas là
     } else if(racine->key > k){ // k est sur la gauche de l'arbre

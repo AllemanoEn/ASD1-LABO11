@@ -70,7 +70,7 @@ private:
     void rIndenter (Node<Key>* racine, std::string prefixe, std::ostream &s, bool droite) const;
     Key const& rComparaisonMin(Node<Key>* racine) const;
     Key const& rComparaisonMax(Node<Key>* racine) const;
-    void rEffacer(Node<Key>* racine, Key const& k) noexcept ;
+    void rEffacer(Node<Key>* &racine, Key const& k) noexcept ;
     Node<Key>* sortir_min(Node<Key>* racine);
 };
 

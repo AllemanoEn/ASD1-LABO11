@@ -262,8 +262,24 @@ TEST_CASE( "erase", "[bst]") {
     SECTION( "contient tous les éléments" ) {
         for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
             tree.insert(i);
+
         tree.erase(7);
-        REQUIRE(!tree.contains(7));
+        ostringstream oss;
+        tree.display_indented(oss);
+
+        REQUIRE( oss.str() == "8\n"
+                              "|_ 4\n"
+                              "|  |_ 1\n"
+                              "|  |  |_ .\n"
+                              "|  |  |_ 2\n"
+                              "|  |     |_ .\n"
+                              "|  |     |_ 3\n"
+                              "|  |_ 6\n"
+                              "|     |_ 5\n"
+                              "|     |_ .\n"
+                              "|_ 11\n"
+                              "   |_ 10\n"
+                              "   |_ 12\n" );
     }
 
 }
