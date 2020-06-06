@@ -412,6 +412,25 @@ TEST_CASE("linearize", "[bst]") {
                              "         |_ 8\n");
     }
 
+    SECTION("double linéarisation") {
+        for (int i : {8, 4, 1, 2, 3})
+            tree.insert(i);
+
+        tree.linearize();
+        tree.linearize();
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE(oss.str() == "1\n"
+                             "|_ .\n"
+                             "|_ 2\n"
+                             "   |_ .\n"
+                             "   |_ 3\n"
+                             "      |_ .\n"
+                             "      |_ 4\n"
+                             "         |_ .\n"
+                             "         |_ 8\n");
+    }
+
     SECTION("arbre des slides d'asd"){
         for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
             tree.insert(i);
