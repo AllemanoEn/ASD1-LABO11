@@ -23,7 +23,7 @@ TEST_CASE( "operator<<", "[bst]") {
     }
 
     SECTION( "Empty tree" ) {
-        REQUIRE( to_string(tree) == "" );
+        REQUIRE( to_string(tree).empty() );
     }
 }
 
@@ -41,7 +41,7 @@ TEST_CASE( "operateur de copie", "[bst]") {
 
     SECTION( "copier arbre vide" ) {
         bst<int> tree2(tree);
-        REQUIRE( to_string(tree2) == "" );
+        REQUIRE( to_string(tree2).empty() );
     }
 }
 
@@ -59,7 +59,7 @@ TEST_CASE( "operateur d'affectation", "[bst]") {
 
     SECTION( "copier arbre vide" ) {
         bst<int> tree2 = tree;
-        REQUIRE( to_string(tree2) == "" );
+        REQUIRE( to_string(tree2).empty() );
     }
 }
 
@@ -207,12 +207,12 @@ TEST_CASE( "destructeur", "[bst]") {
 
     SECTION( "arbre à détruire" ) {
         tree1.~bst();
-        REQUIRE(to_string(tree1) == "");
+        REQUIRE(to_string(tree1).empty());
     }
 
     SECTION( "arbre vide à détruire" ) {
         tree2.~bst();
-        REQUIRE(to_string(tree2) == "");
+        REQUIRE(to_string(tree2).empty());
     }
 
 }
@@ -386,7 +386,7 @@ TEST_CASE( "erase_min", "[bst]") {
         REQUIRE(!tree1.contains(2));
         REQUIRE(!tree1.contains(3));
     }
-    SECTION( "supprimer le max (lève une exception)" ) {
+    SECTION( "supprimer le min (lève une exception)" ) {
         REQUIRE_THROWS_AS(tree3.erase_min(),std::exception);
     }
 }

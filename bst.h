@@ -72,6 +72,7 @@ private:
     Key const& rComparaisonMax(Node<Key>* racine) const;
     void rEffacer(Node<Key>* &racine, Key const& k) noexcept ;
     Node<Key>* sortir_min(Node<Key>* &racine);
+    Node<Key>* rArboriser(Node<Key>* &racine, size_t n);
     void rLineariser(Node<Key>* &racine,Node<Key>* &L,Node<Key>* &n);
 };
 

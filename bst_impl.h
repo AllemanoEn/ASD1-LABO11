@@ -290,6 +290,26 @@ Node<Key>* bst<Key>::sortir_min(Node<Key>* &racine){
 }
 
 template<typename Key>
+void bst<Key>::balance() noexcept {
+    Node<Key>* L = nullptr;
+    size_t n = 0;
+
+    rArboriser(L, n);
+}
+
+template<typename Key>
+Node<Key> *bst<Key>::rArboriser(Node<Key> *&racine, size_t n) {
+    if (n){
+        Node<Key>* rg = rArboriser(racine, (n - 1) / 2);
+        Node<Key>* r = racine;
+        r->left = rg;
+        racine = racine->right;
+        r->right = rArboriser(racine, n/2);
+        return r;
+    }
+}
+
+template<typename Key>
 void bst<Key>::linearize() noexcept {
     rLineariser(root);
 }
