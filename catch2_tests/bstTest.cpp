@@ -461,3 +461,24 @@ TEST_CASE("linearize", "[bst]") {
                              "                           |_ 12\n");
     }
 }
+
+TEST_CASE("balance", "[bst]") {
+    bst<int> tree;
+
+    SECTION("balance d'un arbre binaire gauche") {
+        for (int i : {8, 4, 1, 2, 3})
+            tree.insert(i);
+        ostringstream oss;
+        tree.display_indented(oss);
+        tree.balance();
+        REQUIRE(oss.str() == "8\n"
+                             "|_ 4\n"
+                             "|  |_ 1\n"
+                             "|  |  |_ .\n"
+                             "|  |  |_ 2\n"
+                             "|  |     |_ .\n"
+                             "|  |     |_ 3\n"
+                             "|  |_ .\n"
+                             "|_ .\n");
+    }
+}
