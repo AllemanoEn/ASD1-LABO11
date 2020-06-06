@@ -289,4 +289,22 @@ Node<Key>* bst<Key>::sortir_min(Node<Key>* &racine){
     }
 }
 
+template<typename Key>
+void bst<Key>::linearize() noexcept {
+    rLineariser(root);
+}
+
+template<typename Key>
+void bst<Key>::rLineariser(Node<Key> *&racine, Node<Key> *&L, Node<Key> *&n) {
+    if (racine){
+        rLineariser(racine->right,L,n);
+        racine->right = L;
+        L = racine;
+        n = n + 1;
+
+        rLineariser(racine->left,L,n);
+        racine->left = nullptr;
+    }
+}
+
 #endif //ASD1_LABS_2020_BST_IMPL_H
