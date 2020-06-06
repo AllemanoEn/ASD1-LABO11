@@ -390,3 +390,25 @@ TEST_CASE( "erase_min", "[bst]") {
         REQUIRE_THROWS_AS(tree3.erase_min(),std::exception);
     }
 }
+
+TEST_CASE("linearize", "[bst]") {
+    bst<int> tree;
+
+    SECTION("linéarisation") {
+        for (int i : {8, 4, 1, 2, 3})
+            tree.insert(i);
+
+        tree.linearize();
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE(oss.str() == "1\n"
+                             "|_ .\n"
+                             "|_ 2\n"
+                             "   |_ .\n"
+                             "   |_ 3\n"
+                             "      |_ .\n"
+                             "      |_ 4\n"
+                             "         |_ .\n"
+                             "         |_ 8\n");
+    }
+}

@@ -192,45 +192,44 @@ template<typename Key>
 Key const &bst<Key>::min() const {
 
     if(root){
-        return rComparaisonMin(root);
+        return racineMin(root)->key;
     }else{
         throw std::exception();
     }
 }
 
 template<typename Key>
-Key const &bst<Key>::rComparaisonMin(Node<Key>* racine) const{
+Node<Key>* bst<Key>::racineMin(Node<Key>* racine) const{
     if (racine->left){
-        rComparaisonMin(racine->left);
+        racineMin(racine->left);
     } else{
-        return racine->key;
+        return racine;
     }
 }
-
-
 
 template<typename Key>
 Key const &bst<Key>::max() const {
+
     if(root){
-        return rComparaisonMax(root);
+        return racineMax(root)->key;
     }else{
         throw std::exception();
     }
 }
 
 template<typename Key>
-Key const &bst<Key>::rComparaisonMax(Node<Key> *racine) const{
+Node<Key>* bst<Key>::racineMax(Node<Key>* racine) const{
     if (racine->right){
-        rComparaisonMax(racine->right);
+        racineMax(racine->right);
     } else{
-        return racine->key;
+        return racine;
     }
 }
 
 template<typename Key>
 void bst<Key>::erase_min() {
     if(root) {
-        erase(rComparaisonMin(root));
+        erase(racineMin(root)->key);
     }
     else{
         throw std::exception();
@@ -240,7 +239,7 @@ void bst<Key>::erase_min() {
 template<typename Key>
 void bst<Key>::erase_max() {
     if(root) {
-        erase(rComparaisonMax(root));
+        erase(racineMax(root)->key);
     }
     else{
         throw std::exception();
@@ -311,16 +310,22 @@ Node<Key> *bst<Key>::rArboriser(Node<Key> *&racine, size_t n) {
 
 template<typename Key>
 void bst<Key>::linearize() noexcept {
-    rLineariser(root);
+    Node<Key>* L = nullptr;
+    size_t n = 0;
+    Node<Key>* tmp = racineMin(root);
+    rLineariser(root, L, n);
+    root = tmp;
+    delete L;
+    delete tmp;
 }
 
 template<typename Key>
-void bst<Key>::rLineariser(Node<Key> *&racine, Node<Key> *&L, Node<Key> *&n) {
+void bst<Key>::rLineariser(Node<Key>* &racine, Node<Key>* &L, size_t &n) {
     if (racine){
         rLineariser(racine->right,L,n);
         racine->right = L;
         L = racine;
-        n = n + 1;
+        n++;
 
         rLineariser(racine->left,L,n);
         racine->left = nullptr;

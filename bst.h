@@ -68,12 +68,12 @@ private:
     void rCopier(Node<Key>* racine, Node<Key>* racineCopie);
     void rDetruire(Node<Key> *racine);
     void rIndenter (Node<Key>* racine, std::string prefixe, std::ostream &s, bool droite) const;
-    Key const& rComparaisonMin(Node<Key>* racine) const;
-    Key const& rComparaisonMax(Node<Key>* racine) const;
+    Node<Key>* racineMax(Node<Key>* racine) const;
     void rEffacer(Node<Key>* &racine, Key const& k) noexcept ;
     Node<Key>* sortir_min(Node<Key>* &racine);
     Node<Key>* rArboriser(Node<Key>* &racine, size_t n);
-    void rLineariser(Node<Key>* &racine,Node<Key>* &L,Node<Key>* &n);
+    void rLineariser(Node<Key>* &racine,Node<Key>* &L,size_t &n);
+    Node<Key>* racineMin(Node<Key>* racine) const;
 };
 
 // toutes les fonctions sont définies dans le fichier inclus ci-dessous
