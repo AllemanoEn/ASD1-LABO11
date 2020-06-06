@@ -229,12 +229,22 @@ Key const &bst<Key>::rComparaisonMax(Node<Key> *racine) const{
 
 template<typename Key>
 void bst<Key>::erase_min() {
-    erase(rComparaisonMin(root));
+    if(root) {
+        erase(rComparaisonMin(root));
+    }
+    else{
+        throw std::exception();
+    }
 }
 
 template<typename Key>
 void bst<Key>::erase_max() {
-    erase(rComparaisonMax(root));
+    if(root) {
+        erase(rComparaisonMax(root));
+    }
+    else{
+        throw std::exception();
+    }
 }
 
 template<typename Key>
@@ -268,7 +278,7 @@ void bst<Key>::rEffacer(Node<Key> *&racine, const Key &k) noexcept {
 }
 
 template <typename Key>
-Node<Key>* bst<Key>::sortir_min(Node<Key>* racine){
+Node<Key>* bst<Key>::sortir_min(Node<Key>* &racine){
     if (racine->left){
         return sortir_min(racine->left);
     }

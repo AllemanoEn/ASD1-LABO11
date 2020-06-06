@@ -71,7 +71,7 @@ private:
     Key const& rComparaisonMin(Node<Key>* racine) const;
     Key const& rComparaisonMax(Node<Key>* racine) const;
     void rEffacer(Node<Key>* &racine, Key const& k) noexcept ;
-    Node<Key>* sortir_min(Node<Key>* racine);
+    Node<Key>* sortir_min(Node<Key>* &racine);
 };
 
 // toutes les fonctions sont définies dans le fichier inclus ci-dessous

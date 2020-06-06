@@ -199,14 +199,20 @@ TEST_CASE( "contains", "[bst]") {
 
 TEST_CASE( "destructeur", "[bst]") {
 
-    bst<int> tree;
+    bst<int> tree1;
+    bst<int> tree2;
 
     for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
-        tree.insert(i);
+        tree1.insert(i);
 
     SECTION( "arbre à détruire" ) {
-        tree.~bst();
-        REQUIRE(to_string(tree) == "");
+        tree1.~bst();
+        REQUIRE(to_string(tree1) == "");
+    }
+
+    SECTION( "arbre vide à détruire" ) {
+        tree2.~bst();
+        REQUIRE(to_string(tree2) == "");
     }
 
 }
@@ -289,9 +295,98 @@ TEST_CASE( "erase", "[bst]") {
         for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
             tree.insert(i);
 
-        tree.erase(4);
-        REQUIRE(!tree.contains(4));
+        tree.erase(8);
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE( oss.str() == "10\n"
+                              "|_ 4\n"
+                              "|  |_ 1\n"
+                              "|  |  |_ .\n"
+                              "|  |  |_ 2\n"
+                              "|  |     |_ .\n"
+                              "|  |     |_ 3\n"
+                              "|  |_ 6\n"
+                              "|     |_ 5\n"
+                              "|     |_ 7\n"
+                              "|_ 11\n"
+                              "   |_ .\n"
+                              "   |_ 12\n" );
     }
 
+    SECTION( "suppression de l'arbre entier" ) {
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.insert(i);
 
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.erase(i);
+
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE( oss.str().empty());
+    }
+
+}
+
+TEST_CASE( "erase_max", "[bst]") {
+
+    bst<int> tree1;
+    bst<int> tree2;
+    bst<int> tree3;
+
+    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+        tree1.insert(i);
+    for (int i : {-8, -4, -1, -2, -3, -6, -5, -7, -11, -10, -12})
+        tree2.insert(i);
+
+    SECTION( "supprimer le max" ) {
+        tree1.erase_max();
+        REQUIRE(!tree1.contains(12));
+    }
+    SECTION( "supprimer le max" ) {
+        tree2.erase_max();
+        REQUIRE(!tree2.contains(-1));
+    }
+    SECTION( "supprimer 3 fois le max" ) {
+        tree1.erase_max();
+        tree1.erase_max();
+        tree1.erase_max();
+        REQUIRE(!tree1.contains(10));
+        REQUIRE(!tree1.contains(11));
+        REQUIRE(!tree1.contains(12));
+    }
+    SECTION( "supprimer le max (lève une exception)" ) {
+        REQUIRE_THROWS_AS(tree3.erase_max(),std::exception);
+    }
+}
+
+TEST_CASE( "erase_min", "[bst]") {
+
+    bst<int> tree1;
+    bst<int> tree2;
+    bst<int> tree3;
+
+    for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+        tree1.insert(i);
+    for (int i : {-8, -4, -1, -2, -3, -6, -5, -7, -11, -10, -12})
+        tree2.insert(i);
+
+    SECTION( "supprimer le min" ) {
+        tree1.erase_min();
+        REQUIRE(!tree1.contains(1));
+    }
+    SECTION( "supprimer le min" ) {
+        tree2.erase_min();
+        REQUIRE(!tree2.contains(-12));
+    }
+    SECTION( "supprimer 3 fois le min" ) {
+        tree1.erase_min();
+        tree1.erase_min();
+        tree1.erase_min();
+        REQUIRE(!tree1.contains(1));
+        REQUIRE(!tree1.contains(2));
+        REQUIRE(!tree1.contains(3));
+    }
+    SECTION( "supprimer le max (lève une exception)" ) {
+        REQUIRE_THROWS_AS(tree3.erase_min(),std::exception);
+    }
 }
