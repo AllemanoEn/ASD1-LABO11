@@ -315,8 +315,6 @@ void bst<Key>::linearize() noexcept {
     Node<Key>* tmp = racineMin(root);
     rLineariser(root, L, n);
     root = tmp;
-    delete L;
-    delete tmp;
 }
 
 template<typename Key>

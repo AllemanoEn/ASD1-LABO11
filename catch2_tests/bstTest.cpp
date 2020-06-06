@@ -394,7 +394,7 @@ TEST_CASE( "erase_min", "[bst]") {
 TEST_CASE("linearize", "[bst]") {
     bst<int> tree;
 
-    SECTION("linéarisation") {
+    SECTION("linéarisation d'un arbre binaire gauche") {
         for (int i : {8, 4, 1, 2, 3})
             tree.insert(i);
 
@@ -410,5 +410,35 @@ TEST_CASE("linearize", "[bst]") {
                              "      |_ 4\n"
                              "         |_ .\n"
                              "         |_ 8\n");
+    }
+
+    SECTION("arbre des slides d'asd"){
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.insert(i);
+
+        tree.linearize();
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE(oss.str() == "1\n"
+                             "|_ .\n"
+                             "|_ 2\n"
+                             "   |_ .\n"
+                             "   |_ 3\n"
+                             "      |_ .\n"
+                             "      |_ 4\n"
+                             "         |_ .\n"
+                             "         |_ 5\n"
+                             "            |_ .\n"
+                             "            |_ 6\n"
+                             "               |_ .\n"
+                             "               |_ 7\n"
+                             "                  |_ .\n"
+                             "                  |_ 8\n"
+                             "                     |_ .\n"
+                             "                     |_ 10\n"
+                             "                        |_ .\n"
+                             "                        |_ 11\n"
+                             "                           |_ .\n"
+                             "                           |_ 12\n");
     }
 }
