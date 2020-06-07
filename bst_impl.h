@@ -289,7 +289,7 @@ void bst<Key>::balance() noexcept {
     Node<Key>* L = nullptr;
     size_t n = 0;
     rLineariser(root, L, n);
-    rArboriser(L, n);
+    root = rArboriser(L, n);
 }
 
 template<typename Key>
@@ -302,6 +302,7 @@ Node<Key> *bst<Key>::rArboriser(Node<Key> *&racine, size_t n) {
         r->right = rArboriser(racine, n/2);
         return r;
     }
+    return nullptr;
 }
 
 template<typename Key>

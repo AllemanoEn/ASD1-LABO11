@@ -468,17 +468,67 @@ TEST_CASE("balance", "[bst]") {
     SECTION("balance d'un arbre binaire gauche") {
         for (int i : {8, 4, 1, 2, 3})
             tree.insert(i);
+        tree.balance();
         ostringstream oss;
         tree.display_indented(oss);
-        tree.balance();
-        REQUIRE(oss.str() == "8\n"
-                             "|_ 4\n"
-                             "|  |_ 1\n"
-                             "|  |  |_ .\n"
-                             "|  |  |_ 2\n"
-                             "|  |     |_ .\n"
-                             "|  |     |_ 3\n"
+        REQUIRE(oss.str() == "3\n"
+                             "|_ 1\n"
                              "|  |_ .\n"
-                             "|_ .\n");
+                             "|  |_ 2\n"
+                             "|_ 4\n"
+                             "   |_ .\n"
+                             "   |_ 8\n");
+    }
+
+    SECTION("arbre de la vidéo 5.14") {
+        for (int i = 1; i <= 8; i++)
+            tree.insert(i);
+        tree.balance();
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE(oss.str() == "4\n"
+                             "|_ 2\n"
+                             "|  |_ 1\n"
+                             "|  |_ 3\n"
+                             "|_ 6\n"
+                             "   |_ 5\n"
+                             "   |_ 7\n"
+                             "      |_ .\n"
+                             "      |_ 8\n");
+    }
+
+    SECTION("deux balance consécutives") {
+        for (int i = 1; i <= 8; i++)
+            tree.insert(i);
+        tree.balance();
+        tree.balance();
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE(oss.str() == "4\n"
+                             "|_ 2\n"
+                             "|  |_ 1\n"
+                             "|  |_ 3\n"
+                             "|_ 6\n"
+                             "   |_ 5\n"
+                             "   |_ 7\n"
+                             "      |_ .\n"
+                             "      |_ 8\n");
+    }
+
+    SECTION("balance d'un arbre vide") {
+        tree.balance();
+        ostringstream oss;
+        tree.display_indented(oss);
+        REQUIRE(oss.str().empty());
+    }
+}
+
+TEST_CASE( "visit in order", "[bst]") {
+
+    bst<int> tree;
+
+    SECTION("suppression d'un élément") {
+        for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
+            tree.insert(i);
     }
 }
