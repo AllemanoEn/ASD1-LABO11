@@ -93,7 +93,7 @@ template<typename Fn>
 void bst<Key>::croissant(Fn f, Node<Key> *racine) {
     if (racine){
         croissant(f, racine->left);
-        f(racine);
+        f(racine->key);
         croissant(f, racine->right);
     }
 }
@@ -315,8 +315,6 @@ void bst<Key>::linearize() noexcept {
     Node<Key>* tmp = racineMin(root);
     rLineariser(root, L, n);
     root = tmp;
-    //delete L;
-    //delete tmp;
 }
 
 template<typename Key>
