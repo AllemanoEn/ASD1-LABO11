@@ -5,11 +5,18 @@
 #include <string>
 using namespace std;
 
+ostringstream oss_visit_in_order; //Requis pour le test de visit in order
+
 template<typename T>
 string to_string(T const& t) {
     ostringstream oss;
     oss << t;
     return oss.str();
+}
+
+template<typename Key>
+void keyPair(Key k) {
+    oss_visit_in_order << k << " ";
 }
 
 TEST_CASE( "operator<<", "[bst]") {
@@ -527,8 +534,11 @@ TEST_CASE( "visit in order", "[bst]") {
 
     bst<int> tree;
 
-    SECTION("suppression d'un élément") {
+    SECTION("Utilisation de keyPair") {
         for (int i : {8, 4, 1, 2, 3, 6, 5, 7, 11, 10, 12})
             tree.insert(i);
+        tree.visit_in_order(keyPair<int>);
+
+        REQUIRE(oss_visit_in_order.str() == "1 2 3 4 5 6 7 8 10 11 12 ");
     }
 }
