@@ -1,7 +1,3 @@
-//
-// Created by Olivier Cuisenaire on 23.05.20.
-//
-
 #ifndef ASD1_LABS_2020_BST_IMPL_H
 #define ASD1_LABS_2020_BST_IMPL_H
 
