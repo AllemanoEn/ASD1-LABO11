@@ -63,7 +63,7 @@ private:
     static void insert(Node<Key> *&r, Key const &k);
     static void to_stream(Node<Key> *r, std::ostream &s) noexcept;
     template<typename Fn>
-    void croissant(Fn f, Node<Key>* racine);
+    void croissant(Fn f, Node<Key>* racine) const;
     bool rContient(const Key &k, Node<Key>* racine) const noexcept ;
     void rCopier(Node<Key>* racine, Node<Key>* racineCopie);
     void rDetruire(Node<Key> *racine);

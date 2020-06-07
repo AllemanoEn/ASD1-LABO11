@@ -86,7 +86,7 @@ std::ostream& operator<<(std::ostream& s, bst<Key> const& t)
 
 template<typename Key>
 template<typename Fn>
-void bst<Key>::croissant(Fn f, Node<Key> *racine) {
+void bst<Key>::croissant(Fn f, Node<Key> *racine) const{
     if (racine){
         croissant(f, racine->left);
         f(racine->key);
