@@ -1,3 +1,13 @@
+/// \file bst_impl.h
+/// \authors Enzo Allemano et Adrien Pegiueron
+/// \date 08.06.2020
+///
+/// \brief \b Laboratoire \b 11
+/// \brief Implémente les fonctions de manipulations d'un arbre binaire
+///
+/// Remarque(s) :
+///
+/// Compilateur :  MinGW-g++ 6.3.0
 #ifndef ASD1_LABS_2020_BST_IMPL_H
 #define ASD1_LABS_2020_BST_IMPL_H
 

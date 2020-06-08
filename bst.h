@@ -1,3 +1,13 @@
+/// \file bst.h
+/// \authors Enzo Allemano et Adrien Pegiueron
+/// \date 08.06.2020
+///
+/// \brief \b Laboratoire \b 11
+/// \brief Déclare les fonctions de manipulations d'un arbre binaire
+///
+/// Remarque(s) :
+///
+/// Compilateur :  MinGW-g++ 6.3.0
 #ifndef ASD1_2020_LABO11_BST_H
 #define ASD1_2020_LABO11_BST_H
 

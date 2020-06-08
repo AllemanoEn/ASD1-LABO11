@@ -1,3 +1,13 @@
+/// \file bstTest.cpp
+/// \authors Enzo Allemano et Adrien Pegiueron
+/// \date 08.06.2020
+///
+/// \brief \b Laboratoire \b 11
+/// \brief Contient la série de test des fonctions de manipulations d'un arbre binaire.
+///
+/// Remarque(s) :
+///
+/// Compilateur :  MinGW-g++ 6.3.0
 #include "catch.hpp"
 #include "../bst.h"
 
