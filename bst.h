@@ -24,6 +24,10 @@ class bst { // binary search tree
 public:
 
     bst();
+    /**
+     * insertion d'un élément dans un arbre
+     * @param k clé de l'élément à insérer
+     */
     void insert(Key const &k);
 
     // les fonctions suivantes sont à mettre en oeuvre et à tester.
@@ -32,28 +36,64 @@ public:
     bst &operator=(bst const &other);    // doit offrir la garantie forte
     ~bst();                              // doit libérer proprement toute la mémoire
                                          // une définition vide est actuellement fournie pour que le projet compile.
-
+    /**
+     * recherche un élément dans l'arbre
+     * @param k clé de l'élément recherché
+     * @return true si l'élément est dans le tableaux, false sinon
+     */
     bool contains(Key const& k) const noexcept ; // recherche de l'élément
 
     // toutes les fonctions se référant à min ou max lèvent une std::exception si l'arbre est vide
+    /**
+     * renvoie la plus petite valeur de l'arbre
+     * @return le minimum
+     */
     Key const& min() const ;
+    /**
+     * renvoie la plus grande valeur de l'arbre
+     * @return le maximum
+     */
     Key const& max() const ;
+    /**
+     * efface le minimum
+     */
     void erase_min() ;
+    /**
+     * efface le maximum
+     */
     void erase_max() ;
 
+    /**
+     * efface un noeud spécifique
+     * @param k la clé du noeud à effacer
+     */
     void erase(Key const& k) noexcept ;
 
+    /**
+     * parcours l'arbre de manière croissante en effectuant une fonction sur les noeuds
+     * @tparam Fn
+     * @param f fonction à effectuer
+     */
     template<typename Fn> void visit_in_order(Fn f) const ; // la fonction f prend un élément de type Key en paramètre
                                                             // elle est appelée pour tous les éléments de l'arbre par
                                                             // ordre croissant.
 
     // pour la fonction suivante un test vous est fourni et échoue actuellement
 
+    /**
+     * affiche l'arbre de manière identée
+     * @param s ostream pour l'affichage
+     */
     void display_indented(std::ostream &s) const noexcept ;
 
     // les fonctions suivantes seront expliquées dans la video 5.14
-
+    /**
+     * transforme l'arbre en arbre unaire droite de la plus petite valeur à la plus grande
+     */
     void linearize() noexcept ;
+    /**
+     * équilibre l'arbre
+     */
     void balance() noexcept ;
 
 private:
